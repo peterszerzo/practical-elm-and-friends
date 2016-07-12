@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>CSS by the fireplace</title>
+    <title>Practical Elm and Friends</title>
     <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
     <script src='index.js'></script>
@@ -80,9 +80,9 @@ Add a branch <span class="hljs-keyword">to</span> cover <span class="hljs-keywor
 <li>purely functional language: no objects, not even <code>for</code> loops, juuust some functions.</li>
 <li>brilliant type system - always know what you get.</li>
 <li>no runtime errors. If you find one, just file it as a compiler bug.</li>
-<li>brilliant package manager.</li>
-<li>a real clever way to structure front-end code, one that emerged naturally from the language.</li>
-<li>built with the developer in mind. Just pleasant.</li>
+<li>a rock-solid package manager that yells at you if a change in a package&#39;s API breaks semantic versioning.</li>
+<li>a real clever way to structure front-end code, one that emerges naturally from the design of the language (just parroting back what I heard at a talk).</li>
+<li>built with the developer in mind. Pleasantness all over.</li>
 </ul>
 
           </section>
@@ -99,6 +99,7 @@ Add a branch <span class="hljs-keyword">to</span> cover <span class="hljs-keywor
 <li><a href="http://folktalejs.org/">Folktale.js</a></li>
 <li><a href="https://flowtype.org/">Flow type</a></li>
 <li><a href="https://drboolean.gitbooks.io/mostly-adequate-guide/content/">Mostly Adequate Guide to Functional Programming</a></li>
+<li><a href="https://www.youtube.com/watch?v=6EdXaWfoslc">Effects as data talk</a></li>
 </ul>
 
           </section>
@@ -119,9 +120,9 @@ Add a branch <span class="hljs-keyword">to</span> cover <span class="hljs-keywor
             <h2 id="how-albatross-is-built">How Albatross is built</h2>
 <h3 id="javascript-services">JavaScript services</h3>
 <ul>
-<li>our not very bright, but faithful worker bees.</li>
+<li>our not very bright, but faithful worker bees: just draw a map, just reload an audio tag.</li>
 <li>little or no <code>if</code>, <code>try/catch</code> (they&#39;re awkward).</li>
-<li>no <code>fetch</code> or <code>promises</code> (they bite).</li>
+<li>no <code>fetch</code> or <code>promises</code> (they bite and cause nightmares).</li>
 <li>no <code>typeof a === &#39;undefined&#39; || a === null</code>.</li>
 <li>just some very clear messages from Elm and very clear messages back into Elm.</li>
 </ul>
@@ -173,10 +174,11 @@ greetFirst names =
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Route </span>= Home | About
 
 <span class="hljs-keyword">type</span> <span class="hljs-type">alias </span>Sound =
-  { id : <span class="hljs-type">String</span>, title : <span class="hljs-type">String</span>
-  , description : <span class="hljs-type">String</span>, date : <span class="hljs-type">String</span>
-  , lat : <span class="hljs-type">Float</span>, lng : <span class="hljs-type">Float</span>
+  { id : <span class="hljs-type">String</span>
+  , title : <span class="hljs-type">String</span>
   , trackUrl : <span class="hljs-type">String</span>
+  , lat : <span class="hljs-type">Float</span>
+  , lng : <span class="hljs-type">Float</span>
   }
 </code></pre>
 
@@ -235,7 +237,7 @@ init =
           </section>
           <section id='20'>
             <h2 id="elm-brain-subscriptions">Elm brain - subscriptions</h2>
-<p>The Elm program subscribes to events coming from the outside world, such as (the time, websocket, messages from JS code).</p>
+<p>The Elm program subscribes to events coming from the outside world (the time, websockets, messages from JS code).</p>
 <pre><code><span class="hljs-keyword">subscriptions </span>model =
   <span class="hljs-keyword">Sub.batch
 </span>  [ mapReady MapReady
@@ -270,9 +272,7 @@ init =
 
 domReady(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Hi, Mom!'</span>);
-  <span class="hljs-keyword">var</span> elmApp = Elm.Main.embed(
-    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'elm-app'</span>)
-  );
+  <span class="hljs-keyword">var</span> elmApp = Elm.Main.embed(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'elm-app'</span>));
 });
 </code></pre>
 
@@ -294,7 +294,7 @@ domReady(<span class="hljs-function"><span class="hljs-keyword">function</span>(
             <h2 id="js-services-hooking-it-up-">JS services - hooking it up!</h2>
 <pre><code class="lang-js">domReady(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Hi, Mom!'</span>);
-  <span class="hljs-keyword">var</span> elmApp = Elm.Main.fullscreen();
+  <span class="hljs-keyword">var</span> elmApp = Elm.Main.embed(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'elm-app'</span>));
   elmApp.ports.createMap.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
     createMap({
       onCreated: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
@@ -337,6 +337,8 @@ update msg model =
           </section>
           <section id='29'>
             <h3 id="let-s-write-some-elm-">Let&#39;s write some Elm!</h3>
+<p>Oh, and here are my slides: <a href="https://pickled-plugins.github.io/practical-elm-and-friends/">https://pickled-plugins.github.io/practical-elm-and-friends/</a></p>
+<p>If you liked them, might you want to consider giving me feedback on <a href="https://github.com/pickled-plugins/slides-md">my slide generator</a>?</p>
 
           </section>
       </div>
