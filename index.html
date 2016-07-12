@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CSS by the fireplace</title>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
+    <script src='/index.js'></script>
+  </head>
+  <body>
+    <div class='reveal'>
+      <div class='slides'>
+          <section id='0'>
+            <h1 id="practical-elm-and-friends">Practical Elm. And friends</h1>
+<h3 id="making-albatross">Making Albatross</h3>
+<p>Peter Szerzo</p>
+<p>Cph Frontenders, July 12th, 2016</p>
+
+          </section>
+          <section id='1'>
+            <h2 id="hi-i-m-peter">Hi, I&#39;m Peter</h2>
+<p>I write front-end at <a href="https://airtame.com/">Airtame</a>.</p>
+<p>I go by <a href="https://github.com/pickled-plugins">@pickled-plugins</a> on GitHub, <a href="https://twitter.com/peterszerzo">@peterszerzo</a> on Twitter. I&#39;m online on <a href="http://www.peterszerzo.com/">peterszerzo.com</a>.</p>
+
+          </section>
+          <section id='2'>
+            <h2 id="i-like-side-projects">I like side projects</h2>
+<p><a href="http://albatross.surge.sh/">Albatross</a> is one of them.</p>
+<p>It&#39;s an interactive map that hosts and documents everyday sounds. A sound diary, if you will.</p>
+<p>It&#39;s on <a href="https://github.com/pickled-plugins/albatross">GitHub</a>.</p>
+
+          </section>
+          <section id='3'>
+            <h2 id="making-side-projects-enjoyable">Making side projects enjoyable</h2>
+<h3 id="it-s-our-fun-time">It&#39;s our fun time</h3>
+<p>...for heaven&#39;s sake.</p>
+<h3 id="there-s-little-help">There&#39;s little help</h3>
+<p>No code reviews. No white-board discussions.</p>
+
+          </section>
+          <section id='4'>
+            <h2 id="pieces-of-advice-to-myself">Pieces of advice to myself</h2>
+<ul>
+<li>make friends with your process.</li>
+<li>use tools you love, and use them naturally.</li>
+<li>find a way to not have to spend hours debugging.</li>
+<li>take tiny steps. Start with a cute little front-end, maybe.</li>
+</ul>
+<p>And so...</p>
+
+          </section>
+          <section id='5'>
+            <h2 id="meet-elm-in-conversation">Meet Elm - in conversation</h2>
+<pre><code>The module <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> messed up <span class="hljs-keyword">for</span> ././src/Main/Messages.elm
+
+    According <span class="hljs-keyword">to</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">file</span>'s <span class="hljs-built_in">name</span> <span class="hljs-keyword">it</span> should be Main.Messages
+    According <span class="hljs-keyword">to</span> <span class="hljs-keyword">the</span> source code <span class="hljs-keyword">it</span> should be Main.Messagess
+
+Which <span class="hljs-keyword">is</span> <span class="hljs-keyword">it</span>?
+</code></pre>
+          </section>
+          <section id='6'>
+            <h2 id="meet-elm-more-chit-chat">Meet Elm - more chit-chat</h2>
+<pre><code>This `<span class="hljs-keyword">case</span>` does <span class="hljs-keyword">not</span> have branches <span class="hljs-keyword">for</span> all possibilities.
+
+<span class="hljs-keyword">case</span> msg <span class="hljs-keyword">of</span>
+  WaterYourPlants<span class="hljs-function"> -&gt;</span> <span class="hljs-string">"indeed"</span>
+  TalkAboutYourFeelings<span class="hljs-function"> -&gt;</span> <span class="hljs-string">"always"</span>
+
+You need <span class="hljs-keyword">to</span> account <span class="hljs-keyword">for</span> the following values:
+
+  HaveAGreatTime
+
+Add a branch <span class="hljs-keyword">to</span> cover <span class="hljs-keyword">this</span> pattern!
+</code></pre>
+          </section>
+          <section id='7'>
+            <h2 id="elm-in-a-nutshell">Elm in a nutshell</h2>
+<ul>
+<li>purely functional language: no objects, not even <code>for</code> loops, juuust some functions.</li>
+<li>brilliant type system - always know what you get.</li>
+<li>no runtime errors. If you find one, just file it as a compiler bug.</li>
+<li>brilliant package manager.</li>
+<li>a real clever way to structure front-end code, one that emerged naturally from the language.</li>
+<li>built with the developer in mind. Just pleasant.</li>
+</ul>
+
+          </section>
+          <section id='8'>
+            <h2 id="resources">Resources</h2>
+<h3 id="elm">Elm</h3>
+<ul>
+<li><a href="http://guide.elm-lang.org/">Elm Guide</a></li>
+<li><a href="http://www.elm-tutorial.org/en/">Elm Tutorial</a></li>
+<li><a href="https://github.com/evancz/react-elm-components">React Elm Components</a></li>
+</ul>
+<h3 id="javascript-elm-style">JavaScript, Elm-style</h3>
+<ul>
+<li><a href="http://folktalejs.org/">Folktale.js</a></li>
+<li><a href="https://flowtype.org/">Flow type</a></li>
+<li><a href="https://drboolean.gitbooks.io/mostly-adequate-guide/content/">Mostly Adequate Guide to Functional Programming</a></li>
+</ul>
+
+          </section>
+          <section id='9'>
+            <h2 id="how-albatross-is-built">How Albatross is built</h2>
+<h3 id="elm-brain">Elm brain</h3>
+<ul>
+<li>hangs on to the state of the UI (<code>model</code>).</li>
+<li>defines all ways it can change (<code>messages</code>), and the changes themselves (<code>updates</code>).</li>
+<li>renders the core of the UI (<code>view</code>), wires up event listeners to these ways of changes.</li>
+<li>subscribes to stuff (time, websockets, outside JavaScript).</li>
+<li>runs commands (networks requests, messages to outside JavaScript).</li>
+<li>outsources all the stuff it cannot do.</li>
+</ul>
+
+          </section>
+          <section id='10'>
+            <h2 id="how-albatross-is-built">How Albatross is built</h2>
+<h3 id="javascript-services">JavaScript services</h3>
+<ul>
+<li>our not very bright, but faithful worker bees.</li>
+<li>little or no <code>if</code>, <code>try/catch</code> (they&#39;re awkward).</li>
+<li>no <code>fetch</code> or <code>promises</code> (they bite).</li>
+<li>no <code>typeof a === &#39;undefined&#39; || a === null</code>.</li>
+<li>just some very clear messages from Elm and very clear messages back into Elm.</li>
+</ul>
+
+          </section>
+          <section id='11'>
+            <h2 id="why-">Why?</h2>
+<h3 id="elm">Elm</h3>
+<ul>
+<li>responsible, expressive, safe, proper.</li>
+<li>structuring and restructuring stuff is a breeze (stay tuned for demo).</li>
+<li>sometimes, though, it&#39;s just nice to do a <code>$(&#39;.everything&#39;).fadeOut()</code>. Elm says no can do!</li>
+</ul>
+<h3 id="javascript">JavaScript</h3>
+<ul>
+<li>gives a whole lot of freedom to interact with third-party libraries.</li>
+<li>the same freedom makes me crash and burn as soon as logic and error handling comes into play.</li>
+</ul>
+
+          </section>
+          <section id='12'>
+            <h2 id="who-s-more-trustworthy-">Who&#39;s more trustworthy?</h2>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">greetFirst</span><span class="hljs-params">(names)</span> </span>{
+  <span class="hljs-keyword">var</span> first = names[<span class="hljs-number">0</span>];
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> first !== <span class="hljs-string">'undefined'</span> &amp;&amp; first !== <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello, '</span> + first;
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-string">'Umm, your name again?'</span>;
+}
+</code></pre>
+
+          </section>
+          <section id='13'>
+            <h2 id="who-s-more-trustworthy-">Who&#39;s more trustworthy?</h2>
+<pre><code class="lang-elm"><span class="hljs-function"><span class="hljs-title">greetFirst</span> : List String -&gt;</span> String
+greetFirst names =
+  List.head names
+    |&gt; M<span class="hljs-function"><span class="hljs-title">aybe</span>.map (\<span class="hljs-keyword">name</span> -&gt;</span> <span class="hljs-string">"Hello, "</span> ++ <span class="hljs-keyword">name</span>)
+    |&gt; Maybe.withDefault <span class="hljs-string">"Um, your name again?"</span>
+</code></pre>
+
+          </section>
+          <section id='14'>
+            <h3 id="onto-some-albatross-code-snippets-">Onto some Albatross code snippets...</h3>
+
+          </section>
+          <section id='15'>
+            <h2 id="elm-brain-models">Elm brain - models</h2>
+<pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Route </span>= Home | About
+
+<span class="hljs-keyword">type</span> <span class="hljs-type">alias </span>Sound =
+  { id : <span class="hljs-type">String</span>, title : <span class="hljs-type">String</span>
+  , description : <span class="hljs-type">String</span>, date : <span class="hljs-type">String</span>
+  , lat : <span class="hljs-type">Float</span>, lng : <span class="hljs-type">Float</span>
+  , trackUrl : <span class="hljs-type">String</span>
+  }
+</code></pre>
+
+          </section>
+          <section id='16'>
+            <h2 id="elm-brain-main-ui-model">Elm brain - main UI model</h2>
+<pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">alias </span>Model =
+  { route : <span class="hljs-type">Route</span>
+  , sounds : <span class="hljs-type">List</span> Sound
+  , activeSoundId : <span class="hljs-type">Maybe</span> String
+  , isMapReady : <span class="hljs-type">Bool</span>
+  }
+</code></pre>
+
+          </section>
+          <section id='17'>
+            <h2 id="elm-brain-init">Elm brain - init</h2>
+<p>A function that returns two things:</p>
+<ul>
+<li>the initial ui state.</li>
+<li>some commands that run at the beginning of the program (more on this in a bit).</li>
+</ul>
+<pre><code class="lang-elm">init : (Model, <span class="hljs-built_in">Cmd</span> Msg)
+init =
+  ( Model Home [] <span class="hljs-built_in">Nothing</span> False
+  , <span class="hljs-built_in">Cmd</span>.batch [fetchSoundsCommand, createMapCommand]
+  )
+</code></pre>
+
+          </section>
+          <section id='18'>
+            <h2 id="elm-brain-messages">Elm Brain - messages</h2>
+<p>A message describes what can possibly happen with this UI.</p>
+<pre><code>type Msg =
+  ChangeRoute <span class="hljs-string">|</span>
+  MapReady Bool <span class="hljs-string">|</span>
+  SetActiveSound String <span class="hljs-string">|</span>
+  ClearActiveSound <span class="hljs-string">|</span>
+  FetchSoundsFail Http.Error <span class="hljs-string">|</span>
+  FetchSoundsSucceed (List Sound)
+</code></pre>
+          </section>
+          <section id='19'>
+            <h2 id="elm-brain-update">Elm Brain - update</h2>
+<p>The update function takes a message and the old state of the UI as arguments. It returns two things (like before):</p>
+<ul>
+<li>the new model.</li>
+<li>a command (e.g. http) that sends another message when completed.</li>
+</ul>
+<pre><code><span class="hljs-keyword">update</span> msg <span class="hljs-keyword">model</span> =
+  <span class="hljs-keyword">case</span> msg <span class="hljs-keyword">of</span>
+    SetActiveSoundId <span class="hljs-keyword">id</span> -&gt;
+      ({<span class="hljs-keyword">model</span> | activeSoundId = <span class="hljs-keyword">id</span>}, reloadAudioCommand)
+    ...
+</code></pre>
+          </section>
+          <section id='20'>
+            <h2 id="elm-brain-subscriptions">Elm brain - subscriptions</h2>
+<p>The Elm program subscribes to events coming from the outside world, such as (the time, websocket, messages from JS code).</p>
+<pre><code><span class="hljs-keyword">subscriptions </span>model =
+  <span class="hljs-keyword">Sub.batch
+</span>  [ mapReady MapReady
+  , setActiveSound SetActiveSound
+  , clearActiveSound ClearActiveSound
+  ]
+</code></pre>
+          </section>
+          <section id='21'>
+            <h2 id="elm-brain-view">Elm brain - view</h2>
+<p>Renders Html, wires up event handlers to messages.</p>
+<pre><code>view model =
+  <span class="hljs-keyword">div</span> [<span class="hljs-built_in">class</span> <span class="hljs-string">"wrapper"</span>, onClick ChangeRoute] [<span class="hljs-built_in">text</span> <span class="hljs-string">"Click Me!"</span>]
+</code></pre>
+          </section>
+          <section id='22'>
+            <h2 id="elm-brain-wiring">Elm brain - wiring</h2>
+<p>This is it!</p>
+<pre><code><span class="hljs-attr">main</span> =
+  program
+  { <span class="hljs-attr">init</span> = init
+  , <span class="hljs-attr">update</span> = update
+  , <span class="hljs-attr">view</span> = view
+  , <span class="hljs-attr">subscriptions</span> = subscriptions
+  }
+</code></pre>
+          </section>
+          <section id='23'>
+            <h2 id="elm-brain-finally-">Elm brain - finally!</h2>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> domReady = <span class="hljs-built_in">require</span>(<span class="hljs-string">'domready'</span>);
+<span class="hljs-keyword">var</span> Elm = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Main.elm'</span>);
+
+domReady(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Hi, Mom!'</span>);
+  <span class="hljs-keyword">var</span> elmApp = Elm.Main.embed(
+    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'elm-app'</span>)
+  );
+});
+</code></pre>
+
+          </section>
+          <section id='24'>
+            <h2 id="js-services-the-mapper">JS services - the mapper</h2>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createMap</span><span class="hljs-params">(handlers)</span> </span>{
+  <span class="hljs-keyword">var</span> map = <span class="hljs-keyword">new</span> mapboxgl.Map({container: <span class="hljs-string">'app'</span>, style: <span class="hljs-string">'mf'</span>});
+  map.on(<span class="hljs-string">'load'</span>, handlers.onCreated);
+  map.on(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span> </span>{
+    <span class="hljs-comment">// Not asking questions, just calling the boss...</span>
+    handlers.onClick(e.lngLat.lat, e.lngLat.lng);
+  });
+}
+</code></pre>
+
+          </section>
+          <section id='25'>
+            <h2 id="js-services-hooking-it-up-">JS services - hooking it up!</h2>
+<pre><code class="lang-js">domReady(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Hi, Mom!'</span>);
+  <span class="hljs-keyword">var</span> elmApp = Elm.Main.fullscreen();
+  elmApp.ports.createMap.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    createMap({
+      onCreated: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        elmApp.ports.mapReady.send(<span class="hljs-literal">true</span>);
+      }
+    });
+  });
+}
+</code></pre>
+
+          </section>
+          <section id='26'>
+            <h2 id="meanwhile-in-the-brain-">Meanwhile, in the brain...</h2>
+<pre><code class="lang-elm">port mapReady : <span class="hljs-function"><span class="hljs-params">(Bool -&gt; msg)</span> -&gt;</span> Sub msg
+
+subscriptions model = mapReady MapReady
+
+update msg model =
+  <span class="hljs-keyword">case</span> msg <span class="hljs-keyword">of</span>
+    MapReady<span class="hljs-function"> -&gt;</span>
+      ({model | isMapReady = True}, renderSoundsCommand)
+  ...
+</code></pre>
+
+          </section>
+          <section id='27'>
+            <h2 id="in-a-nutshell">In a nutshell</h2>
+<ul>
+<li>set up a robust core of the application in Elm.</li>
+<li>set up some very dump and decoupled JavaScript modules for stuff Elm cannot do.</li>
+<li>wire them up with crystal-clear messages, subscriptions and commands.</li>
+</ul>
+
+          </section>
+          <section id='28'>
+            <h2 id="can-i-use-this-at-work-">Can I use this at work?</h2>
+<p>Yes. Eventually.</p>
+<p>But I can write Elm-style JavaScript tomorrow.</p>
+
+          </section>
+          <section id='29'>
+            <h3 id="let-s-write-some-elm-">Let&#39;s write some Elm!</h3>
+
+          </section>
+      </div>
+    </div>
+  </body>
+</html>
