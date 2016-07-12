@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-content": "node scripts/build.js",
+    "build:content": "node scripts/build.js",
+    "build:assets": "NODE_ENV=production webpack --config webpack.config.js",
+    "build": "npm run build:content && npm run build:assets",
     "dev": "webpack --config webpack.config.js --watch",
     "server": "python -m SimpleHTTPServer 1998"
   },

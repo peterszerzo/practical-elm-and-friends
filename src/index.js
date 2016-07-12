@@ -6,6 +6,7 @@ require('./theme.scss');
 
 domReady(function() {
   Reveal.initialize({
+    width: 1020,
     center: true,
     controls: false,
     transition: 'slide',

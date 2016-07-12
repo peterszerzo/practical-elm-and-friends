@@ -3,21 +3,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-$light-blue: #2C5784;
+$light-blue: #062B40;
 $yellow: #DACC3E;
 $orange: lighten(#E8640C, 5);
 $purple: #6A5B6E;
 $red: lighten(#D92800, 10);
 $grey: #888888;
 $white: #ffffff;
-$transparent-white: rgba(255, 255, 255, .3);
-$transparent-black: rgba(0, 0, 0, .2);
+$transparent-white: rgba(255, 255, 255, 0.3);
+$transparent-black: rgba(0, 0, 0, 0.2);
 
 $border-width: 2px;
 
 $font-size-text: 26px;
 $font-size-subheading: 40px;
-$font-size-heading: 50px;
+$font-size-heading: 60px;
 $font-size-title: 72px;
 
 body {
@@ -61,7 +61,7 @@ body {
 
   h1,
   h2 {
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
   // Title area
@@ -72,7 +72,8 @@ body {
     margin-bottom: 0;
     line-height: 0.9;
     top: $space1;
-    + h3 {
+
+    & + h3 {
       position: relative;
       top: $space1;
       text-align: center;
@@ -117,7 +118,7 @@ body {
 
   h2 {
     font-size: $font-size-heading;
-    margin: 15px auto 60px;
+    margin: 10px auto 45px;
     border-bottom: 1px solid $transparent-white;
     padding-bottom: 0;
 
@@ -130,7 +131,7 @@ body {
 
   h3 {
     font-size: $font-size-subheading;
-    margin: 10px auto 35px;
+    margin: 35px auto 10px;
   }
 
   p,
@@ -159,12 +160,14 @@ body {
   p,
   code,
   li {
-    line-height: 1.9;
+    line-height: 1.35;
+    margin: 15px 0;
   }
 
   ul {
     list-style-position: inside;
-    + p {
+
+    & + p {
       margin-top: 25px;
     }
   }
@@ -173,10 +176,12 @@ body {
     font-family: 'Courier';
     text-align: left;
     color: $white;
+  }
 
-    em & {
-      color: $yellow;
-    }
+  em code,
+  p code,
+  li code {
+    color: $yellow;
   }
 
   blockquote {

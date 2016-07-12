@@ -1,3 +1,6 @@
+'use strict';
+
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
@@ -19,5 +22,6 @@ module.exports = {
       }
     ]
   },
+  plugins: process.env.NODE_ENV === 'production' ? [new webpack.optimize.UglifyJsPlugin()] : [],
   devtool: 'source-map'
 };
